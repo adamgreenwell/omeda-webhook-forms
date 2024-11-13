@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
             },
             success: function(response) {
                 if (response.success) {
-                    $form.html('<p class="success-message">Thank you! Your form has been submitted successfully.</p>');
+                    $form.html('<p class="success-message">' + response.data.message + '</p>');
                 } else {
                     $form.prepend('<p class="error-message">' + response.data + '</p>');
                     $form.find('button[type="submit"]').prop('disabled', false);
