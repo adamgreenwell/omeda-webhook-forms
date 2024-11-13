@@ -1,8 +1,8 @@
 <?php
 
-/**
- * File: admin/partials/forms-list.php
- */
+/*
+* File: admin/partials/forms-list.php
+*/
 
 ?>
 <div class="wrap">
@@ -24,7 +24,6 @@
                 <th>Form Name</th>
                 <th>Webhook URL</th>
                 <th>Shortcode</th>
-                <th>Fields</th>
                 <th>Created</th>
                 <th>Actions</th>
             </tr>
@@ -35,11 +34,11 @@
                 <td><?php echo esc_html($form['name']); ?></td>
                 <td><?php echo esc_url($form['webhook_url']); ?></td>
                 <td><code>[omeda_form id="<?php echo esc_attr($form_id); ?>"]</code></td>
-                <td><?php echo esc_html(implode(', ', $form['fields'])); ?></td>
                 <td><?php echo esc_html($form['created_at']); ?></td>
                 <td>
                     <a href="<?php echo admin_url('admin.php?page=omeda-forms-new&form_id=' . urlencode($form_id)); ?>">Edit</a> |
-                    <a href="#" class="delete-form" data-id="<?php echo esc_attr($form_id); ?>">Delete</a>
+                    <a href="#" class="delete-form" data-id="<?php echo esc_attr($form_id); ?>"
+                       data-name="<?php echo esc_attr($form['name']); ?>">Delete</a>
                 </td>
             </tr>
             <?php endforeach; ?>
