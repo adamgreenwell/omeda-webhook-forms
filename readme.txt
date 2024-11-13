@@ -26,6 +26,11 @@ Documentation pending
 
 == Changelog ==
 
+= 1.0.3 =
+*Release Date - 13 November 2024*
+
+* Add customizable success message for each form
+
 = 1.0.2 =
 *Release Date - 13 November 2024*
 
