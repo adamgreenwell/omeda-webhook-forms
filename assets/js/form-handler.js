@@ -1,4 +1,6 @@
-// js/form-handler.js
+/*
+* File: assets/js/form-handler.js
+*/
 jQuery(document).ready(function($) {
     $('.omeda-form').on('submit', function(e) {
         e.preventDefault();
