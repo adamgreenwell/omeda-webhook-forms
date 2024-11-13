@@ -88,19 +88,34 @@ class OmedaWebhookForms
 		$json_data->submittedAt = gmdate('Y-m-d\TH:i:s\Z');
 
 		$this->log_error('Preparing webhook request', array('url' => $webhook_url, 'json_data' => $json_data));
-
-		$response = wp_remote_post($webhook_url, array('body' => json_encode($json_data), 'headers' => array('Content-Type' => 'application/json', 'Accept' => 'application/json'), 'timeout' => 30, 'sslverify' => true, 'data_format' => 'body'));
-
+	
+		$response = wp_remote_post($webhook_url, array(
+			'body' => json_encode($json_data),
+			'headers' => array(
+				'Content-Type' => 'application/json',
+				'Accept' => 'application/json'
+			),
+			'timeout' => 30,
+			'sslverify' => true,
+			'data_format' => 'body'
+		));
+	
 		if (is_wp_error($response)) {
-			$this->log_error('WordPress error during submission', array('error_message' => $response->get_error_message(), 'error_code' => $response->get_error_code()));
+			$this->log_error('WordPress error during submission', array(
+				'error_message' => $response->get_error_message(),
+				'error_code' => $response->get_error_code()
+			));
 			wp_send_json_error('Failed to submit form: ' . $response->get_error_message());
 		}
-
+	
 		$response_code = wp_remote_retrieve_response_code($response);
 		$response_body = wp_remote_retrieve_body($response);
-
-		$this->log_error('Webhook response received', array('response_code' => $response_code, 'response_body' => $response_body));
-
+	
+		$this->log_error('Webhook response received', array(
+			'response_code' => $response_code,
+			'response_body' => $response_body
+		));
+	
 		if ($response_code !== 200) {
 			$error_message = 'Failed to submit form. ';
 			if (!empty($response_body)) {
@@ -113,8 +128,11 @@ class OmedaWebhookForms
 			}
 			wp_send_json_error($error_message);
 		}
-
-		wp_send_json_success('Form submitted successfully');
+	
+		// Return success with custom message
+		wp_send_json_success(array(
+			'message' => wp_kses_post($form['success_message'] ?? 'Form submitted successfully')
+		));
 	}
 
 	private function log_error($message, $data = array())

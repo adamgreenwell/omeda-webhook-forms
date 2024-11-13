@@ -101,7 +101,8 @@ class OmedaAdmin
 		}
 
 		// Get and sanitize form data
-		$form_data = array('name' => sanitize_text_field($_POST['name']), 'webhook_url' => esc_url_raw($_POST['webhook_url']), 'fields' => $form_fields, 'created_at' => current_time('mysql'));
+		$form_data = array('name' => sanitize_text_field($_POST['name']), 'webhook_url' => esc_url_raw($_POST['webhook_url']), 'fields' => $form_fields, 'success_message' => wp_kses_post($_POST['success_message']), // Add success message
+			'created_at' => current_time('mysql'));
 
 		// Validate required fields
 		if (empty($form_data['name']) || empty($form_data['webhook_url']) || empty($form_data['fields'])) {
