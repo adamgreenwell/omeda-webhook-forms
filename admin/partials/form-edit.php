@@ -94,6 +94,15 @@ $error_type = isset($_GET['error']) ? sanitize_text_field($_GET['error']) : '';
 						technical name (lowercase, no spaces). Label is what users will see on the form.</p>
 				</td>
 			</tr>
+			<tr>
+				<th scope="row"><label for="success_message">Success Message</label></th>
+				<td>
+					<textarea id="success_message" name="success_message" class="large-text" rows="3"><?php
+						echo esc_textarea(isset($form['success_message']) ? $form['success_message'] : 'Thank you! Your form has been submitted successfully.');
+					?></textarea>
+					<p class="description">Enter the message to display when the form is submitted successfully.</p>
+				</td>
+			</tr>
 		</table>
 
 		<?php submit_button($form_id ? 'Update Form' : 'Create Form'); ?>
