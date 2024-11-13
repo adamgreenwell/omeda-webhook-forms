@@ -12,6 +12,21 @@ if (!defined('ABSPATH')) exit;
 
 require_once plugin_dir_path(__FILE__) . 'includes/class-omeda-webhook-forms-admin.php';
 
+/**
+ * Update checker
+ */
+require 'update/plugin-update-checker.php';
+use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
+
+$myUpdateChecker = PucFactory::buildUpdateChecker(
+	'https://github.com/adamgreenwell/omeda-webhook-forms/',
+	__FILE__,
+	'omeda-webhook-forms'
+);
+
+//Set the branch that contains the stable release.
+$myUpdateChecker->setBranch('main');
+
 class OmedaWebhookForms
 {
 	private $plugin_name;
