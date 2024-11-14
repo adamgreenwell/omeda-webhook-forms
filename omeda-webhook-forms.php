@@ -2,7 +2,7 @@
 /*
 * Plugin Name: Omeda Webhook Forms
 * Description: Captures form data and sends them to a webhook endpoint within the Omeda platform
-* Version: 1.0.3
+* Version: 1.0.4
 * Author: Adam Greenwell
 * Text Domain: omeda-webhook-forms
 * File: omeda-webhook-forms.php
@@ -11,21 +11,10 @@
 if (!defined('ABSPATH')) exit;
 
 require_once plugin_dir_path(__FILE__) . 'includes/class-omeda-webhook-forms-admin.php';
+require_once plugin_dir_path(__FILE__) . 'update/github-updater.php';
 
-/**
- * Update checker
- */
-require 'update/plugin-update-checker.php';
-use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
-
-$myUpdateChecker = PucFactory::buildUpdateChecker(
-	'https://github.com/adamgreenwell/omeda-webhook-forms/',
-	__FILE__,
-	'omeda-webhook-forms'
-);
-
-//Set the branch that contains the stable release.
-$myUpdateChecker->setBranch('main');
+$updater = new GitHub_Updater(__FILE__);
+$updater->set_github_info('adamgreenwell', 'omeda-webhook-forms');
 
 class OmedaWebhookForms
 {
@@ -37,7 +26,7 @@ class OmedaWebhookForms
 	public function __construct()
 	{
 		$this->plugin_name = 'omeda-form-handler';
-		$this->version = '1.0.3';
+		$this->version = '1.0.4';
 		$this->option_name = 'omeda_forms';
 
 		// Initialize admin if in admin area
