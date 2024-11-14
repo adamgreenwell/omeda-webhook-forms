@@ -2,7 +2,7 @@
 
 Contributors: Adam Greenwell
 
-Stable tag: 1.0.4
+Stable tag: 1.0.5
 Tested up to: 6.7
 Requires at least: 5.2
 Requires PHP: 7.4
@@ -25,6 +25,9 @@ specified webhook endpoint.
 Documentation pending
 
 == Changelog ==
+
+= 1.0.5 =
+*Release Date - 14 November 2024*
 
 = 1.0.4 =
 *Release Date - 14 November 2024*

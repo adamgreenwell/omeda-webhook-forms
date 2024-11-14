@@ -2,7 +2,7 @@
 /*
 * Plugin Name: Omeda Webhook Forms
 * Description: Captures form data and sends them to a webhook endpoint within the Omeda platform
-* Version: 1.0.4
+* Version: 1.0.5
 * Author: Adam Greenwell
 * Text Domain: omeda-webhook-forms
 * File: omeda-webhook-forms.php
@@ -26,7 +26,7 @@ class OmedaWebhookForms
 	public function __construct()
 	{
 		$this->plugin_name = 'omeda-form-handler';
-		$this->version = '1.0.4';
+		$this->version = '1.0.5';
 		$this->option_name = 'omeda_forms';
 
 		// Initialize admin if in admin area

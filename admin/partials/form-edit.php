@@ -58,7 +58,7 @@ $error_type = isset($_GET['error']) ? sanitize_text_field($_GET['error']) : '';
 			<tr>
 				<th scope="row"><label for="form_fields">Form Fields</label></th>
 				<td>
-					<div id="field-container">
+					<div id="field-container" class="sortable">
 						<?php
 						if (!empty($form['fields'])):
 							foreach ($form['fields'] as $field => $config):
@@ -66,6 +66,7 @@ $error_type = isset($_GET['error']) ? sanitize_text_field($_GET['error']) : '';
 								$field_label = is_array($config) ? $config['label'] : '';
 								?>
 								<div class="field-row">
+									<div class="drag-handle dashicons dashicons-menu"></div>
 									<div class="field-inputs">
 										<input type="text" name="fields[]" value="<?php echo esc_attr($field_name); ?>"
 											   class="regular-text field-name"
@@ -79,6 +80,7 @@ $error_type = isset($_GET['error']) ? sanitize_text_field($_GET['error']) : '';
 							<?php endforeach;
 						else: ?>
 							<div class="field-row">
+								<div class="drag-handle dashicons dashicons-menu"></div>
 								<div class="field-inputs">
 									<input type="text" name="fields[]" class="regular-text field-name"
 										   placeholder="Field name (e.g., email, first_name)" required>
@@ -90,8 +92,9 @@ $error_type = isset($_GET['error']) ? sanitize_text_field($_GET['error']) : '';
 						<?php endif; ?>
 					</div>
 					<button type="button" class="button add-field">Add Field</button>
-					<p class="description">Add the fields you want to collect in your form. Field name should be a
-						technical name (lowercase, no spaces). Label is what users will see on the form.</p>
+					<p class="description">Add the fields you want to collect in your form. Drag and drop to reorder
+						fields. Field name should be a technical name (lowercase, no spaces). Label is what users will
+						see on the form.</p>
 				</td>
 			</tr>
 			<tr>
@@ -99,7 +102,7 @@ $error_type = isset($_GET['error']) ? sanitize_text_field($_GET['error']) : '';
 				<td>
 					<textarea id="success_message" name="success_message" class="large-text" rows="3"><?php
 						echo esc_textarea(isset($form['success_message']) ? $form['success_message'] : 'Thank you! Your form has been submitted successfully.');
-					?></textarea>
+						?></textarea>
 					<p class="description">Enter the message to display when the form is submitted successfully.</p>
 				</td>
 			</tr>
@@ -115,6 +118,15 @@ $error_type = isset($_GET['error']) ? sanitize_text_field($_GET['error']) : '';
 		display: flex;
 		align-items: flex-start;
 		gap: 10px;
+		background: #fff;
+		padding: 10px;
+		border: 1px solid #ddd;
+		border-radius: 4px;
+		cursor: move;
+	}
+
+	.field-row:hover {
+		border-color: #999;
 	}
 
 	.field-inputs {
@@ -136,12 +148,44 @@ $error_type = isset($_GET['error']) ? sanitize_text_field($_GET['error']) : '';
 	.field-name {
 		font-family: monospace;
 	}
+
+	.drag-handle {
+		color: #999;
+		cursor: move;
+		padding: 10px 0;
+	}
+
+	.field-row:hover .drag-handle {
+		color: #666;
+	}
+
+	.sortable-placeholder {
+		border: 2px dashed #ccc;
+		margin-bottom: 10px;
+		height: 90px;
+		border-radius: 4px;
+	}
+
+	.ui-sortable-helper {
+		background: #fff;
+		box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+	}
 </style>
 
 <script>
 	jQuery(document).ready(function ($) {
+// Initialize sortable
+		$('#field-container').sortable({
+			handle: '.drag-handle',
+			placeholder: 'sortable-placeholder',
+			forcePlaceholderSize: true,
+			opacity: 0.8,
+			tolerance: 'pointer'
+		});
+
 		$('.add-field').on('click', function () {
 			var fieldHtml = '<div class="field-row">' +
+				'<div class="drag-handle dashicons dashicons-menu"></div>' +
 				'<div class="field-inputs">' +
 				'<input type="text" name="fields[]" class="regular-text field-name" ' +
 				'placeholder="Field name (e.g., email, first_name)" required>' +
