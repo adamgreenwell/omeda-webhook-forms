@@ -19,6 +19,15 @@ class OmedaAdmin
 		add_action('admin_menu', array($this, 'add_admin_menu'));
 		add_action('admin_post_save_omeda_form', array($this, 'handle_form_save'));
 		add_action('wp_ajax_delete_omeda_form', array($this, 'handle_form_deletion'));
+		add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_scripts'));
+	}
+
+	public function enqueue_admin_scripts($hook) {
+		if ('omeda-forms_page_omeda-forms-new' !== $hook) {
+			return;
+		}
+		wp_enqueue_script('jquery-ui-sortable');
+		wp_enqueue_style('dashicons');
 	}
 
 	public function add_admin_menu()
