@@ -29,6 +29,8 @@ Documentation pending
 = 1.0.5 =
 *Release Date - 14 November 2024*
 
+* Add ability to rearrange form fields with drag and drop using jQuery UI Sortable
+
 = 1.0.4 =
 *Release Date - 14 November 2024*
 
