@@ -37,7 +37,7 @@ class OmedaWebhookForms
 	public function __construct()
 	{
 		$this->plugin_name = 'omeda-form-handler';
-		$this->version = '1.0.2';
+		$this->version = '1.0.3';
 		$this->option_name = 'omeda_forms';
 
 		// Initialize admin if in admin area
