@@ -2,11 +2,11 @@
 
 Contributors: Adam Greenwell
 
-Stable tag: 1.0.3 \
+Stable tag: 1.0.4 \
 Tested up to: 6.7 \
 Requires at least: 5.2 \
-Requires PHP: 8.2 \
-Requires at least: 8.0 \
+Requires PHP: 7.4 \
+Requires at least: 7.4 \
 License: GPLv2 or later
 
 Plugin adds the ability to create forms that can be added to a page or post using a shortcode. Form data is sent to a
@@ -24,6 +24,11 @@ specified webhook endpoint.
 Documentation pending
 
 ### Changelog ###
+
+#### 1.0.4 ####
+*Release Date - 14 November 2024*
+
+* Simplify checking for plugin updates
 
 #### 1.0.3 ####
 *Release Date - 13 November 2024*
